@@ -346,7 +346,7 @@ export default {
       this.targetR1 = parseInt(this.target.ordinaryOneTargetScore) + parseInt(this.target.experimentOneTargetScore) + parseInt(this.target.endingOneTargetScore)
     },
     'target.ordinaryTwoTargetScore': function () {
-      this.targetR2 = parseInt(this.target.ordinaryTwoargetScore) + parseInt(this.target.experimentTwoTargetScore) + parseInt(this.target.endingTwoTargetScore)
+      this.targetR2 = parseInt(this.target.ordinaryTwoTargetScore) + parseInt(this.target.experimentTwoTargetScore) + parseInt(this.target.endingTwoTargetScore)
     },
     'target.experimentTwoTargetScore': function () {
       this.targetR2 = parseInt(this.target.ordinaryTwoTargetScore) + parseInt(this.target.experimentTwoTargetScore) + parseInt(this.target.endingTwoTargetScore)
