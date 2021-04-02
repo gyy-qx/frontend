@@ -11,7 +11,7 @@ module.exports = {
         target: 'http://localhost:8080',
         changeOrigin: true,
         ws: true,
-        pathRewrite: { '^/api': '/' }
+        pathRewrite: { '^/api': '' }
       }
     } // 设置代理
   }

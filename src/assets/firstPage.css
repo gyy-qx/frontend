@@ -1,0 +1,18 @@
+.area{
+    /*display: block;*/
+    width: 500px;
+    height: 100px;
+    /*margin-left: 100px;*/
+}
+#annotate{
+    font-size: 8px;
+}
+.el-drawer.rtl {
+    overflow: scroll;
+}
+table{
+    text-align: center;
+}
+.ratio{
+    width: 20px;
+}
