@@ -1,0 +1,53 @@
+.mes{
+    width: 70px;
+    text-align: center;
+}
+.option{
+    width: 100px;
+}
+.drawInput{
+    width: 150px;
+}
+#submitClass{
+    margin-left: 30%;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+#addStudent{
+    height: 80px;
+    vertical-align: center;
+    text-align: right;
+    colspan: 6;
+}
+#addClass{
+    margin-left: 60%;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+#studentManage #classTable td{
+    border: solid 1px #c0c2c3;
+    border-radius: 5px;
+    height: 60px;
+}
+#studentManage #classTable{
+    margin-left: 5%;
+}
+#studentManage #classTable th{
+    border: solid 1px #c0c2c3;
+    border-radius: 5px;
+}
+
+#studentManage{
+    margin-left: 15%;
+}
+#studentManage h3{
+    margin-top:50px;
+    margin-left:5%;
+    margin-bottom: 10px;
+    font-family: 幼圆;
+    font-size: 30px;
+}
+#studentManage #search{
+    margin-left: 5%;
+}

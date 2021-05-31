@@ -15,6 +15,9 @@
     <router-link to="/signIn">
       <button type="link">去注册</button>
     </router-link>
+    <router-link to="/about">
+      <button type="link">跳转页面</button>
+    </router-link>
     <br>
     <br>
     <router-link to="/teacherHomepage">

@@ -1,3 +1,16 @@
+#firstPage{
+    margin-left: 15%;
+}
+h3{
+    margin-top:50px;
+    margin-left:5%;
+    margin-bottom: 10px;
+    font-family: 幼圆;
+    font-size: 30px;
+}
+hr{
+    margin-bottom: 50px;
+}
 .area{
     /*display: block;*/
     width: 500px;
@@ -16,3 +29,44 @@ table{
 .ratio{
     width: 20px;
 }
+.courseBack{
+    border-radius: 10px;
+    /*border: solid #484a4b 1px;*/
+    background-color: #e9f4ff;
+    width: 250px;
+    height: 240px;
+    margin-left: 5%;
+    margin-bottom: 30px;
+    text-align: center;
+    display: inline-block;
+}
+.intoButton{
+    text-decoration: none;
+    border-radius: 10px;
+    border: solid #b3a3b9 1px;
+    background-color: #e9f4ff;
+    width: 250px;
+    height: 240px;
+}
+
+.avatarOne {
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 240px;
+    height: 150px;
+    border-radius: 10px;
+    /*border: solid #484a4b 1px;*/
+    text-align: center;
+    display: inline-block;
+}
+
+.courseBack p{
+    text-align: left;
+    margin-left: 5px;
+    color: #4f5050;
+}
+router-link{
+    text-decoration: none;
+}
+
+

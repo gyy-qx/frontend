@@ -1,0 +1,37 @@
+h1{
+    margin-top:50px;
+    margin-left:100px;
+    margin-bottom: 10px;
+    font-family: 幼圆;
+    font-size: 30px;
+    color: #4ff09b;
+}
+h1 span {
+    font-size: 23px;
+    color: #41464b;
+}
+
+.el-menu-demo{
+    margin-left: 150px;
+}
+
+#targetText{
+    width: 50%;
+    font-size: 8px;
+    border: #1a1e21;
+    border-radius: 5px;
+    border-shadow: 5px;
+    background-color: #4ff09b;
+    margin-left: 50%;
+}
+
+#targetText span{
+    color: #1a1e21;
+    font-size: 8px;
+}
+
+#targetText .strong{
+    color: #ff5442;
+    font-size: 10px;
+}
+

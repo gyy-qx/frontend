@@ -1,0 +1,99 @@
+#courseManage{
+    margin-left: 15%;
+}
+#courseManage h3{
+    margin-top:50px;
+    margin-left:5%;
+    margin-bottom: 10px;
+    font-family: 幼圆;
+    font-size: 30px;
+}
+#courseManage .block{
+    margin-left: 5%;
+}
+#courseManage #addCourse{
+    margin-left: 75%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    display: block;
+}
+.titleWarn{
+    font-size: 15px;
+    color: #42d0f0;
+    height: 50px;
+}
+#space{
+    height: 50px;
+}
+.coverAvatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    /*cursor: pointer;*/
+    /*position: relative;*/
+    overflow: hidden;
+    margin-left: 10%;
+    display: inline-block;
+}
+.coverAvatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+.coverAvatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.coverAvatar {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+.mesCourse{
+    width: 100px;
+    text-align: center;
+    border: none;
+}
+.option{
+    width: 200px;
+}
+.courseBackFather{
+    display: inline-block;
+    margin-left: 5%;
+}
+#courseManage .courseBackFa,.courseBack{
+    margin-left: 5%;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+.courseBack{
+    border-radius: 10px;
+    /*border: solid #484a4b 1px;*/
+    background-color: #e9f4ff;
+    width: 250px;
+    height: 240px;
+    margin-left: 5%;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+.intoButton{
+    text-decoration: none;
+    border-radius: 10px;
+    border: solid #b3a3b9 1px;
+    background-color: #e9f4ff;
+    width: 250px;
+    height: 240px;
+}
+
+.avatarOne {
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 240px;
+    height: 150px;
+    border-radius: 10px;
+    /*border: #a7a9aa solid 1px;*/
+    /*border: solid #484a4b 1px;*/
+    /*text-align: center;*/
+    display: inline-block;
+}

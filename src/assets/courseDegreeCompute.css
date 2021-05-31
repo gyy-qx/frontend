@@ -1,0 +1,17 @@
+.title{
+    display: inline-block;
+    font-size: 25px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom:100px;
+    color: #027eff;
+}
+#compute{
+    position: absolute;
+    right: 50px;
+    top:50px
+}
+#CourseDegreeCompute #printButton{
+    margin-left: 50%;
+    margin-bottom: 100px;
+}

@@ -1,0 +1,32 @@
+table tr{
+    width: 600px;
+    height: 50px;
+}
+
+#CourseUpdate table{
+    margin-left: 15%;
+    margin-top: 2%;
+    margin-bottom: 100px;
+}
+#CourseUpdate table td{
+    border:solid 1px #b3a3b9;
+    border-radius: 5px;
+}
+#CourseUpdate table input,el-upload{
+text-align: center;
+}
+.inputCourse{
+    width: 700px;
+    border: none;
+}
+#CourseUpdate #deleteButton{
+    border: none;
+    margin-left: 50%;
+    margin-top: 5%;
+}
+
+#CourseUpdate .avatar-uploader{
+    margin-left: -300px;
+}
+#CourseUpdate .avatar{
+}

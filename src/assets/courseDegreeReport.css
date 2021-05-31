@@ -1,0 +1,45 @@
+#CourseDegreeReport .longText{
+    width: 100%;
+    height: 80px;
+    padding-top: 30px;
+}
+#CourseDegreeReport .data{
+    width: 30px;
+    margin-right: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#CourseDegreeReport .signName{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin-right: 20px;
+}
+#CourseDegreeReport .widthTd{
+    /*line-height: 100px;*/
+}
+
+#CourseDegreeReport #reportTitle{
+    margin-top:50px;
+    margin-left:25%;
+    margin-bottom: 10px;
+    font-family: 幼圆;
+    font-size: 30px;
+}
+
+#CourseDegreeReport #printMe{
+    margin-left: 20%;
+}
+
+#CourseDegreeReport #printButton{
+    margin-left: 45%;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+#CourseDegreeReport #tableEdit{
+    margin-left: 0px;
+}
+

@@ -1,0 +1,39 @@
+#UpLoad{
+    margin-left: 18%;
+}
+#UpLoad h1{
+    margin-bottom: 50px;
+}
+#classTable{
+    margin-left: 3%;
+}
+#classTable td{
+    width: 250px;
+    height: 60px;
+    border: solid 1px #c0c2c3;
+    border-radius: 5px;
+}
+#classTable tr{
+    height: 50px;
+}
+
+.disabled{
+    width: 150px;
+    /*background-color: #4ff09b;*/
+    font: 15px solid black ;
+}
+
+/*#tableLeft,#tableRight{*/
+/*    float: left;*/
+/*    margin-top: 100px;*/
+/* }*/
+#scoreEdit td{
+   width: 150px;
+    border: 1px;
+}
+
+.stu1{
+    width: 110px;
+}
+.stu2{
+}

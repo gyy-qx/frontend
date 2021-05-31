@@ -1,21 +1,31 @@
 <template>
   <div id="firstPage">
-    <h3>我教的课<span>{{user}}</span></h3>
-    <el-button @click="drawer = true">测试</el-button>
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;" v-for="(course1,index) in courseList" :key="index" >
-      {{course1}}
-    </el-button>
+    <h3>我教的课</h3>
+    <hr>
+    <div id="course">
+      <div v-for="(course1,index) in courseList" :key="index" class="courseBack">
+        <button @click="into(index)" class="intoButton">
+<!--          <el-popover placement="right" trigger="hover">-->
+<!--            <img :src= "'http://localhost:8080/coverImg/' + course1.courseCover" style="width: 300px;height: 300px">-->
+            <img slot="reference" :src= "'http://localhost:8080/coverImg/' + course1.courseCover" class="avatarOne">
+<!--          </el-popover>-->
+        <p>{{course1.courseGrade}}</p>
+        <p>{{course1.courseName}}</p>
+        <p>{{course1.courseMajor}}</p>
+        </button>
+      </div>
+    </div>
     <el-drawer
       title="教学大纲"
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose"
-      size="80%">
+      size="85%">
       <h4>一、基本信息</h4>
       <table border="1">
         <tr>
           <td>课程名称（中文）</td>
-          <td><input type="text" class="mes" v-model="course.courseName"></td>
+          <td><input type="text" class="mes" v-model="course.courseName" disabled="disabled"></td>
         </tr>
         <tr>
           <td>课程名称（英文）</td>
@@ -48,7 +58,9 @@
         </tr>
         <tr>
           <td>适用专业</td>
-          <td><input type="text" class="mes" v-model="course.courseMajor"></td>
+          <td>
+            <input type="text" class="mes" v-model="course.courseApplyMajor">
+          </td>
           <td>先修课程</td>
           <td><input type="text" class="mes" v-model="course.courseAdvancedPlacement"></td>
         </tr>
@@ -84,28 +96,41 @@
         </tr>
         <tr>
           <td>课程目标1</td>
-          <td><input type="textarea" class="area" v-model="character.courseTargetOne"></td>
-          <td><input type="textarea" class="area" v-model="character.courseRequirementOne"></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseTargetOne"></textarea>
+            <!--            <input type="textarea" class="area" v-model="character.courseTargetOne">-->
+          </td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementOne"></textarea>
+          </td>
         </tr>
         <tr>
           <td>课程目标2</td>
-          <td><input type="textarea" class="area" v-model="character.courseTargetTwo"></td>
-          <td><input type="textarea" class="area" v-model="character.courseRequirementTwo"></td>
+          <td><textarea class="area" cols="30" rows="10" v-model="character.courseTargetTwo"></textarea></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementTwo"></textarea>
+          </td>
         </tr>
         <tr>
           <td>课程目标3</td>
-          <td><input type="textarea" class="area" v-model="character.courseTargetThree"></td>
-          <td><input type="textarea" class="area" v-model="character.courseRequirementThree"></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseTargetThree"></textarea></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementThree"></textarea></td>
         </tr>
         <tr>
           <td>课程目标4</td>
-          <td><input type="textarea" class="area" v-model="character.courseTargetFour"></td>
-          <td><input type="textarea" class="area" v-model="character.courseRequirementFour"></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseTargetFour"></textarea></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementFour"></textarea></td>
         </tr>
         <tr>
           <td>课程目标5</td>
-          <td><input type="textarea" class="area" v-model="character.courseTargetFive"></td>
-          <td><input type="textarea" class="area" v-model="character.courseRequirementFive"></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseTargetFive"></textarea></td>
+          <td>
+            <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementFive"></textarea></td>
         </tr>
       </table>
       <h4>三、课程考核</h4>
@@ -184,8 +209,11 @@ export default {
     return {
       drawer: false,
       direction: 'rtl',
-      user: this.$store.state.user,
+      user: '',
       courseList: null,
+      courseMajor: '',
+      courseGrade: '',
+      majorList: [],
       course: {
         courseName: '',
         courseEnglish: '',
@@ -194,6 +222,7 @@ export default {
         courseTerm: '',
         courseCredit: '',
         courseClassHour: '',
+        courseApplyMajor: '',
         courseMajor: '',
         courseExaminationMethod: '',
         courseSpecificMethod: '',
@@ -213,6 +242,7 @@ export default {
         courseRequirementFive: ''
       },
       target: {
+        courseName: '',
         courseWeightOne: '',
         courseWeightTwo: '',
         courseWeightThree: '',
@@ -245,11 +275,16 @@ export default {
     }
   },
   created () {
+    this.user = sessionStorage.getItem('loginUser')
     axios.post('api/scoreCreated', {
       teacherNum: this.user
     }).then(res => {
-      console.log(res.data)
       this.courseList = res.data
+    }).catch(function (error) {
+      console.log(error)
+    })
+    axios.get('api/majorCreated').then(res => {
+      this.majorList = res.data
     }).catch(function (error) {
       console.log(error)
     })
@@ -262,6 +297,18 @@ export default {
         })
         .catch(_ => {})
     },
+    openEdit (index) {
+      this.drawer = true
+      this.course.courseName = this.courseList[index].courseName
+      this.courseMajor = this.courseList[index].courseMajor
+      this.courseGrade = this.courseList[index].courseGrade
+    },
+    into (index) {
+      this.$router.push({ name: 'Submit' })
+      sessionStorage.setItem('courseName', this.courseList[index].courseName)
+      sessionStorage.setItem('courseMajor', this.courseList[index].courseMajor)
+      sessionStorage.setItem('courseGrade', this.courseList[index].courseGrade)
+    },
     GetClassification (event) {
       this.course.courseClassification = event.target.value
       console.log(this.course.courseClassification)
@@ -270,7 +317,7 @@ export default {
       this.course.courseCharacter = event.target.value
     },
     GetExaminationMethod (event) {
-      this.course.GetExaminationMethod = event.target.value
+      this.course.courseExaminationMethod = event.target.value
     },
     GetSpecificMethod (event) {
       this.course.courseSpecificMethod = event.target.value
@@ -279,13 +326,15 @@ export default {
       axios.post('api/scoreRatio', {
         course: {
           courseName: this.course.courseName,
+          courseGrade: this.courseGrade,
           courseEnglish: this.course.courseEnglish,
           courseClassification: this.course.courseClassification,
           courseCharacter: this.course.courseCharacter,
           courseTerm: this.course.courseTerm,
           courseCredit: this.course.courseCredit,
           courseClassHour: this.course.courseClassHour,
-          courseMajor: this.course.courseMajor,
+          courseApplyMajor: this.courseApplyMajor,
+          courseMajor: this.courseMajor,
           courseExaminationMethod: this.course.courseExaminationMethod,
           courseSpecificMethod: this.course.courseSpecificMethod,
           courseAdvancedPlacement: this.course.courseAdvancedPlacement,
@@ -293,6 +342,8 @@ export default {
         },
         character: {
           courseName: this.course.courseName,
+          courseGrade: this.courseGrade,
+          courseMajor: this.courseMajor,
           courseTargetOne: this.character.courseTargetOne,
           courseTargetTwo: this.character.courseTargetTwo,
           courseTargetThree: this.character.courseTargetThree,
@@ -305,6 +356,9 @@ export default {
           courseRequirementFive: this.character.courseRequirementFive
         },
         target: {
+          courseName: this.course.courseName,
+          courseGrade: this.courseGrade,
+          courseMajor: this.courseMajor,
           courseWeightOne: this.target.courseWeightOne,
           courseWeightTwo: this.target.courseWeightTwo,
           courseWeightThree: this.target.courseWeightThree,
@@ -319,7 +373,7 @@ export default {
           ordinaryTwoTargetScore: this.target.ordinaryTwoTargetScore,
           experimentTwoTargetScore: this.target.experimentTwoTargetScore,
           endingTwoTargetScore: this.target.endingTwoTargetScore,
-          ordinaryThreeTargetScore: this.ordinaryThreeTargetScore,
+          ordinaryThreeTargetScore: this.target.ordinaryThreeTargetScore,
           experimentThreeTargetScore: this.target.experimentThreeTargetScore,
           endingThreeTargetScore: this.target.endingThreeTargetScore,
           ordinaryFourTargetScore: this.target.ordinaryFourTargetScore,
@@ -330,6 +384,7 @@ export default {
           endingFiveTargetScore: this.target.endingFiveTargetScore
         }
       }).then(res => {
+        alert(res.data)
       }).catch(function (error) {
         console.log(error)
       })

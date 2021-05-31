@@ -1,0 +1,44 @@
+#submitOrl{
+    margin-left: 18%;
+}
+.area{
+    /*display: block;*/
+    width: 500px;
+    height: 100px;
+    /*margin-left: 100px;*/
+}
+#annotate{
+    font-size: 8px;
+}
+.el-drawer.rtl {
+    overflow: scroll;
+}
+table{
+    text-align: center;
+}
+.ratio{
+    width: 20px;
+}
+
+.submitTitle{
+    font-family: 幼圆;
+    font-size: 25px;
+    color: #4ff09b;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.mes{
+    width:95%;
+    height: 100%;
+    border: #8c939d;
+}
+
+#submitOrl #submitButton{
+    margin-left: 45%;
+    margin-bottom: 100px;
+}
+
+#submitOrl .avatar-uploader{
+    margin-left: -300px;
+}
+

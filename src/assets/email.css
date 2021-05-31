@@ -1,0 +1,68 @@
+#emailMy{
+    margin-left: 15%;
+}
+#emailMy h3{
+    margin-top:50px;
+    margin-left:5%;
+    margin-bottom: 10px;
+    font-family: 幼圆;
+    font-size: 30px;
+}
+#emailMy hr{
+    margin-bottom: 50px;
+}
+#emailMy #updateStateAll{
+    margin-left: 70%;
+    margin-bottom: 20px;
+    border: none;
+    color: #42d0f0;
+}
+#emailMy .noRead button{
+    text-align: left;
+    width: 75%;
+    height: 100px;
+    background-color: #4cf0d7;
+    border: #8c939d 1px solid;
+    margin-bottom: 50px;
+    margin-left: 5%;
+    border-radius: 10px;
+}
+
+#emailMy .haveRead button{
+    text-align: left;
+    width: 75%;
+    height: 100px;
+    background-color: #8c939d;
+    border: #8c939d 1px solid;
+    margin-bottom: 50px;
+    margin-left: 5%;
+    border-radius: 10px;
+}
+
+#emailMy button .content{
+    margin-left: 5%;
+    display: inline-block;
+    width: 80%;
+}
+
+#emailMy button .time{
+    display: inline-block;
+    position: absolute;
+    right: 380px;
+}
+
+#emailMy #delete{
+    background-color: white;
+    border: none;
+    margin-left: 85%;
+    font-size: 15px;
+    color: deepskyblue;
+}
+
+#emailMy h4,h5{
+    display: inline-block;
+}
+
+#emailMy h5{
+    margin-left: 2%;
+}
