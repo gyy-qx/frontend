@@ -7,8 +7,6 @@
         @open="handleOpen"
         @close="handleClose"
         id="menu"
-        background-color="#545c64"
-        text-color="#fff"
       >
         <el-popover placement="right" trigger="hover">
           <img :src= "imageUrl" style="width: 300px;height: 300px">

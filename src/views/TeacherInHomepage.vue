@@ -7,8 +7,6 @@
         @open="handleOpen"
         @close="handleClose"
         id="menu"
-        background-color="#545c64"
-        text-color="#fff"
       >
             <el-popover placement="right" trigger="hover">
               <img :src= "imageUrl" style="width: 300px;height: 300px">
@@ -32,10 +30,17 @@
             <el-menu-item index="3-3" @click="goTo('/assignEnding')">考试</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="4" @click="goTo('/upLoad')">
-          <i class="el-icon-upload2"></i>
-          <span slot="title">提交成绩</span>
-        </el-menu-item>
+        <el-submenu index="4">
+          <template slot="title">
+            <i class="el-icon-upload2"></i>
+            <span>提交成绩</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="4-1" @click="goTo('/upLoad')">班级管理</el-menu-item>
+            <el-menu-item index="4-2" @click="goTo('/gradeDegreeCompute')">年级达成度计算表</el-menu-item>
+            <el-menu-item index="4-3" @click="goTo('/gradeDegreeReport')">年级达成度分析报告</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </el-col>
     <!--    路由匹配到的组件将显示在这里-->

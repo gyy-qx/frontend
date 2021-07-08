@@ -1,10 +1,10 @@
 <template>
     <div id="submitOrl">
         <h4 class="submitTitle">一、基本信息</h4>
-        <table border="1">
+        <table border="1" class="SubmitTable">
           <tr>
             <td>课程名称（中文）</td>
-            <td colspan="3"><input type="text" class="mes" v-model="course.courseName" disabled="disabled"></td>
+            <td colspan="3" v-text="course.courseName"></td>
           </tr>
           <tr>
             <td>课程名称（英文）</td>
@@ -89,7 +89,7 @@
           </tr>
         </table>
         <h4 class="submitTitle">二、课程教学目标</h4>
-        <table border="1">
+        <table border="1" class="SubmitTable">
           <tr>
             <td></td>
             <td>课程目标内容</td>
@@ -98,44 +98,131 @@
           <tr>
             <td>课程目标1</td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseTargetOne"></textarea>
-              <!--            <input type="textarea" class="area" v-model="character.courseTargetOne">-->
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseTargetOne"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
             </td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementOne"></textarea>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseRequirementOne"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
             </td>
           </tr>
           <tr>
             <td>课程目标2</td>
-            <td><textarea class="area" cols="30" rows="10" v-model="character.courseTargetTwo"></textarea></td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementTwo"></textarea>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseTargetTwo"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+            </td>
+            <td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseRequirementTwo"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
             </td>
           </tr>
           <tr>
             <td>课程目标3</td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseTargetThree"></textarea></td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseTargetThree"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+              </td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementThree"></textarea></td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseRequirementThree"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+              </td>
           </tr>
           <tr>
             <td>课程目标4</td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseTargetFour"></textarea></td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseTargetFour"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+              </td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementFour"></textarea></td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseRequirementFour"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+              </td>
           </tr>
           <tr>
             <td>课程目标5</td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseTargetFive"></textarea></td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseTargetFive"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+              </td>
             <td>
-              <textarea class="area" cols="30" rows="10" v-model="character.courseRequirementFive"></textarea></td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                v-model="character.courseRequirementFive"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+              </td>
           </tr>
         </table>
         <h4 class="submitTitle">三、课程考核</h4>
-        <table border="1">
+        <table border="1" class="SubmitTable">
           <!--        考核细则表不再生成，页面设计时看是否能做成随课程信息生成-->
           <tr>
             <td colspan="2">课程目标/课程目标权重ri</td>
@@ -294,7 +381,9 @@ export default {
       courseGrade: this.courseGrade,
       courseMajor: this.courseMajor
     }).then(res => {
-      this.character = res.data
+      if (res.data.length === 0) {
+        this.character = []
+      } else { this.character = res.data }
     }).catch(function (error) {
       console.log(error)
     })
@@ -303,7 +392,11 @@ export default {
       courseGrade: this.courseGrade,
       courseMajor: this.courseMajor
     }).then(res => {
-      this.target = res.data
+      if (res.data.length === 0) {
+        this.character = []
+      } else {
+        this.target = res.data
+      }
     }).catch(function (error) {
       console.log(error)
     })
@@ -327,6 +420,8 @@ export default {
       this.course.courseSpecificMethod = event.target.value
     },
     submit () {
+      console.log(this.target)
+      console.log(this.targetText)
       axios.post('api/scoreRatio', {
         course: {
           courseName: this.course.courseName,

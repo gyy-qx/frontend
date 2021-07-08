@@ -10,6 +10,7 @@
       </el-select>
       <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
       </div>
+      <div id="studentManage_class">
       <el-button type="primary" icon="el-icon-plus" @click="addClass" id="addClass">添加班级</el-button>
       <table style="width:60%" id="classTable">
         <tr>
@@ -94,6 +95,7 @@
         </table>
         <el-button type="primary" @click="insertStudentByClass" id="submitClass">提交</el-button>
       </el-drawer>
+      </div>
     </div>
 </template>
 
@@ -218,7 +220,10 @@ export default {
         studentSex: this.student.studentSex,
         studentData: this.student.studentData
       }).then(res => {
-        alert(res.data)
+        this.$message({
+          message: res.data,
+          type: 'success'
+        })
       }
       ).catch(function (error) {
         console.log(error)
@@ -237,7 +242,10 @@ export default {
       axios.post('api/insertStudentByClass', {
         studentList: this.studentList
       }).then(res => {
-        alert(res.data)
+        this.$message({
+          message: res.data,
+          type: 'success'
+        })
       }).catch(function (error) {
         console.log(error)
       })
@@ -264,7 +272,10 @@ export default {
         studentSex: this.studentList[index].studentSex,
         studentData: this.studentList[index].studentData
       }).then(res => {
-        alert(res.data)
+        this.$message({
+          message: res.data,
+          type: 'success'
+        })
       }).catch(function (error) {
         console.log(error)
       })
@@ -273,7 +284,10 @@ export default {
       axios.post('api/deleteStudent', {
         studentSno: this.studentList[index].studentSno
       }).then(res => {
-        alert(res.data)
+        this.$message({
+          message: res.data,
+          type: 'success'
+        })
       }).catch(function (error) {
         console.log(error)
       })

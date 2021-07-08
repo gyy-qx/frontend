@@ -176,16 +176,41 @@
           </tr>
           <tr>
             <td class="widthTd">成绩构成及评分标准</td>
-            <td colspan="7"><el-input class="longText"></el-input></td>
+            <td colspan="7">
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+            </td>
           </tr>
           <tr>
             <td class="widthTd">成绩分析(包括成绩异常）及改进措施</td>
-            <td colspan="7"><el-input class="longText"></el-input></td>
+            <td colspan="7">
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入内容"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+            </td>
           </tr>
           <tr>
             <td rowspan="2" class="widthTd">专业负责人审核意见：</td>
             <td colspan="7" style="border: none">
-            <el-input class="longText"></el-input>
+              <el-input
+                type="textarea"
+                :rows="3"
+                placeholder="请输入内容"
+                maxlength="100"
+                show-word-limit
+              >
+              </el-input>
             </td>
           </tr>
           <tr>
@@ -357,8 +382,16 @@ export default {
         courseName: this.courseName,
         studentClass: this.courseClass
       }).then(res => {
-        this.resultList = res.data
-        this.compute()
+        if (res.data.length === 0) {
+          this.$message({
+            message: '请提交成绩后再下载达成度分析报告',
+            type: 'warning'
+          })
+        } else {
+          this.$message('请填写相关条目后下载达成度分析报告')
+          this.resultList = res.data
+          this.compute()
+        }
       }).catch(function (error) {
         console.log(error)
       })
@@ -382,7 +415,6 @@ export default {
     }).catch(function (error) {
       console.log(error)
     })
-    this.$message('请填写相关条目后下载达成度分析报告')
   },
   methods: {
     compute () {

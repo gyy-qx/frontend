@@ -20,6 +20,9 @@ hr{
 #annotate{
     font-size: 8px;
 }
+#course{
+    margin-left: 3%;
+}
 .el-drawer.rtl {
     overflow: scroll;
 }
@@ -33,7 +36,7 @@ table{
     border-radius: 10px;
     /*border: solid #484a4b 1px;*/
     background-color: #e9f4ff;
-    width: 250px;
+    width: 270px;
     height: 240px;
     margin-left: 5%;
     margin-bottom: 30px;
@@ -45,14 +48,14 @@ table{
     border-radius: 10px;
     border: solid #b3a3b9 1px;
     background-color: #e9f4ff;
-    width: 250px;
+    width: 270px;
     height: 240px;
 }
 
 .avatarOne {
     margin-left: 0px;
     margin-top: 0px;
-    width: 240px;
+    width: 260px;
     height: 150px;
     border-radius: 10px;
     /*border: solid #484a4b 1px;*/

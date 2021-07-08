@@ -10,7 +10,7 @@
           <td>专业</td>
           <td>年级</td>
           <td v-for="(item,index) in processScoreList[0].displayScore" :key="index">
-            {{item.processClassification}}{{item.processNumber}}
+            <span>{{item.processClassification}}{{item.processNumber}}</span>
           </td>
         </tr>
           <tr v-for="(item1,index1) in processScoreList" :key="index1">
@@ -19,7 +19,9 @@
         <td v-text="item1.studentSex"></td>
         <td v-text="item1.studentMajor"></td>
         <td v-text="item1.studentGrade"></td>
-        <td v-for="(score,index2) in processScoreList[index1].displayScore" :key="index2">{{score.processScore}}</td>
+        <td v-for="(score,index2) in processScoreList[index1].displayScore" :key="index2">
+          <span>{{score.processScore}}</span>
+        </td>
       </tr>
       </table>
     </div>
@@ -133,6 +135,7 @@ export default {
           courseName: this.courseName
         }).then(res => {
           this.processScoreList[i].displayScore = res.data
+          this.processScoreList[i].displayScore.sort(this.compare('processClassification'))
           this.add()
         }).catch(function (error) {
           console.log(error)
@@ -161,6 +164,13 @@ export default {
     })
   },
   methods: {
+    compare (attr) {
+      return function (a, b) {
+        var a1 = a[attr]
+        var b1 = b[attr]
+        if ((a1 === '平时任务' && b1 === '实验（测验）') || (a1 === '平时任务' && b1 === '考试') || (a1 === '实验（测验）' && b1 === '考试')) { return -1 } else if ((a1 === '平时任务' && b1 === '平时任务') || (a1 === '实验（测验）' && b1 === '实验（测验）') || (a1 === '考试' && b1 === '考试')) { return 0 } else return 1
+      }
+    },
     add () {
       this.resultList = []
       for (let i = 0; i < this.processScoreList.length; i++) {

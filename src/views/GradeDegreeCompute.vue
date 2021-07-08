@@ -1,8 +1,8 @@
 <template>
-    <div id="CourseDegreeCompute">
-        <div id="printMe">
-          <p v-text="courseName" class="title"></p><p v-text="courseClass" class="title"></p><p class="title">班</p>
-          <table id="scoreEdit">
+  <div id="GradeCompute" style="margin-left: 15%">
+    <div id="printMe">
+      <p v-text="courseName" class="title"></p><p v-text="courseGrade" class="title"></p><p class="title"></p>
+      <table id="scoreEdit">
         <tr>
           <td colspan="2" style="font-size: 10px">学生/课程目标</td>
           <td colspan="3" v-if="target[0].courseWeightOne!=null">课程目标一(<span v-text="target[0].courseWeightOne"></span>)</td>
@@ -62,7 +62,7 @@
           <td><el-input class="stu2" v-model="result.courseAchievementDegree"></el-input></td>
         </tr>
         <tr>
-          <td colspan="2">班级均值</td>
+          <td colspan="2">年级均值</td>
           <td v-if="target[0].courseWeightOne!=null"><el-input class="stu2" v-model="classSum.courseOneOrdinaryScore"></el-input></td>
           <td v-if="target[0].courseWeightOne!=null"><el-input class="stu2" v-model="classSum.courseOneExperimentScore"></el-input></td>
           <td v-if="target[0].courseWeightOne!=null"><el-input class="stu2" v-model="classSum.courseOneEndingScore"></el-input></td>
@@ -86,15 +86,15 @@
           <td><el-input class="stu2" v-model="classSum.courseAchievementDegree"></el-input></td>
         </tr>
       </table>
-      </div>
-      <br>
-      <el-button type="primary" v-print="printObj" id="printButton">打印班级达成度计算表</el-button>
     </div>
+    <br>
+    <el-button type="primary" v-print="printObj" id="printButton" style="margin-left: 50%;margin-bottom: 50px">打印年级达成度计算表</el-button>
+  </div>
 </template>
 
 <!--加上scoped能够防止样式之间的冲突-->
 <style scoped>
-@import "../assets/courseDegreeCompute.css";
+  @import "../assets/courseDegreeCompute.css";
 </style>
 
 <script>
@@ -203,9 +203,8 @@ export default {
         })
       } else {
         this.target = res.data
-        axios.post('api/getResultScore', {
-          courseName: this.courseName,
-          studentClass: this.courseClass
+        axios.post('api/getResultScoreByGrade', {
+          courseName: this.courseName
         }).then(res => {
           if (res.data.length === 0) {
             this.$message({
@@ -237,12 +236,14 @@ export default {
       }
     },
     getStudentName () {
-      axios.post('api/selectStudentByClass', {
-        studentClass: this.courseClass
+      axios.post('api/getStudentByGrade', {
+        courseMajor: sessionStorage.getItem('courseMajor'),
+        courseGrade: sessionStorage.getItem('courseGrade')
       }).then(res => {
         console.log(res.data[0].studentName)
         for (let i = 0; i < res.data.length; i++) {
           this.studentNameList.push(res.data[i].studentName)
+          this.studentNameList.sort()
         }
       }).catch(function (error) {
         console.log(error)
@@ -275,7 +276,7 @@ export default {
         for (i = 0; i < this.resultList.length; i++) {
           this.resultList[i].courseOneAchievementDegree = parseFloat((this.resultList[i].courseOneOrdinaryScore +
             this.resultList[i].courseOneExperimentScore + this.resultList[i].courseOneEndingScore) / (this.target[0].ordinaryOneTargetScore +
-          this.target[0].experimentOneTargetScore + this.target[0].endingOneTargetScore)).toFixed(2)
+            this.target[0].experimentOneTargetScore + this.target[0].endingOneTargetScore)).toFixed(2)
           this.resultList[i].courseAchievementDegree = this.resultList[i].courseOneAchievementDegree * this.target[0].courseWeightOne
           this.classSum.courseOneOrdinaryScore = parseFloat(this.classSum.courseOneOrdinaryScore + this.resultList[i].courseOneOrdinaryScore)
           this.classSum.courseOneExperimentScore = parseFloat(this.classSum.courseOneExperimentScore + this.resultList[i].courseOneExperimentScore)
@@ -359,9 +360,8 @@ export default {
       for (let i = 0; i < this.resultList.length; i++) {
         this.resultList[i].courseAchievementDegree = parseFloat(this.resultList[i].courseAchievementDegree).toFixed(2)
       }
-      this.classSum.className = this.courseClass
+      this.classSum.className = this.courseGrade
       this.classSum.courseName = this.courseName
-      console.log(this.classSum)
       this.classSum.courseAchievementDegree = parseFloat(this.classSum.courseAchievementDegree).toFixed(2)
       axios.post('api/updateAchievementDegree', {
         resultList: this.resultList,

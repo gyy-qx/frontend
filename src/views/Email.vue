@@ -2,6 +2,7 @@
     <div id="emailMy">
       <h3>我的邮箱</h3>
       <hr>
+      <div id="emailBody">
       <el-button @click="updateStateAll" id="updateStateAll">全部已读</el-button>
       <div v-for="(item,index) in emailList" :key="index">
         <div v-if="item.emailState==='0'" class="noRead">
@@ -9,7 +10,7 @@
           <h4>{{item.emailTitle}}</h4>
           <h5>{{item.courseMajor}}{{item.courseGrade}}{{item.courseName}}</h5>
           <br>
-          <p>邮件内容：</p><p class="content">{{item.emailContent}} </p>
+          <p>邮件内容：</p><p class="content">{{item.emailContent|length(60)}} </p>
           <p class="time">{{item.emailTime}}</p>
         </button>
       </div>
@@ -20,7 +21,7 @@
             <h4>{{item.emailTitle}}</h4>
             <h5>{{item.courseMajor}}{{item.courseGrade}}{{item.courseName}}</h5>
             <br>
-            <p>邮件内容：</p> <p class="content">{{item.emailContent}}</p>
+            <p>邮件内容：</p> <p class="content">{{item.emailContent|length(60)}}</p>
             <p class="time">{{item.emailTime}}</p>
           </button>
         </div>
@@ -38,6 +39,7 @@
           <el-button type="primary" @click="updateState" v-else>标为未读</el-button>
         </div>
       </el-dialog>
+      </div>
     </div>
 </template>
 
@@ -86,6 +88,11 @@ export default {
     }).catch(function (error) {
       console.log(error)
     })
+  },
+  filters: {
+    length (value, num) {
+      return value.slice(0, num) + '...'
+    }
   },
   methods: {
     open (index) {

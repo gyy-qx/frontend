@@ -25,6 +25,9 @@
     margin-bottom: 40px;
     margin-top: 20px;
 }
+#studentManage_class{
+    margin-left: 3%;
+}
 #studentManage #classTable td{
     border: solid 1px #c0c2c3;
     border-radius: 5px;

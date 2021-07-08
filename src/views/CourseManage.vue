@@ -11,6 +11,7 @@
             @change="handleChange"></el-cascader>
         <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
         </div>
+      <div id="courseList">
       <el-button type="primary" icon="el-icon-plus" @click="addCourse" id="addCourse">添加课程</el-button>
       <el-dialog title="添加课程" :visible.sync="dialogVisible">
         课程名称<el-input v-model="courseName"></el-input>
@@ -63,6 +64,7 @@
             <p>{{course1.courseMajor}}</p>
           </button>
         </div>
+      </div>
     </div>
 </template>
 

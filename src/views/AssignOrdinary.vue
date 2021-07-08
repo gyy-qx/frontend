@@ -2,29 +2,29 @@
     <div id="assignOrdinary">
         <h1>{{courseName}} <span>{{courseMajor}}{{courseGrade}}</span>  </h1>
         <div id="targetText">
-          <p class="strong">课程目标一：<span v-text="targetText.courseTargetOne"></span> </p>
-          <p class="strong">课程目标二：<span v-text="targetText.courseTargetTwo"></span></p>
-          <p class="strong">课程目标三：<span v-text="targetText.courseTargetThree"></span></p>
-          <p class="strong">课程目标四：<span v-text="targetText.courseTargetFour"></span></p>
-          <p class="strong">课程目标五：<span v-text="targetText.courseTargetFive"></span></p>
+          <p class="strong" v-if="targetText.courseTargetOne!=null&&targetText.courseTargetOne.length!=0">课程目标一：<span v-text="targetText.courseTargetOne"></span> </p>
+          <p class="strong" v-if="targetText.courseTargetTwo!=null&&targetText.courseTargetTwo.length!=0">课程目标二：<span v-text="targetText.courseTargetTwo"></span></p>
+          <p class="strong" v-if="targetText.courseTargetThree!=null&&targetText.courseTargetThree.length!=0">课程目标三：<span v-text="targetText.courseTargetThree"></span></p>
+          <p class="strong" v-if="targetText.courseTargetFour!=null&&targetText.courseTargetFour.length!=0">课程目标四：<span v-text="targetText.courseTargetFour"></span></p>
+          <p class="strong" v-if="targetText.courseTargetFive!=null&&targetText.courseTargetFive.length!=0">课程目标五：<span v-text="targetText.courseTargetFive"></span></p>
         </div>
-      <table>
+      <table id="assignOrdinary_table">
         <tr><el-button type="primary" icon="el-icon-plus"  @click="dialogVisible1 = true">添加任务题目</el-button></tr>
         <tr>
-          <td>考核类别</td>
-          <td>任务序号</td>
-          <td>任务内容</td>
-          <td v-if="target[0].ordinaryOneTargetScore!==null&&target[0].ordinaryOneTargetScore!==0">是否支撑课程目标一</td>
-          <td v-if="target[0].ordinaryTwoTargetScore!==null&&target[0].ordinaryTwoTargetScore!==0">是否支撑课程目标二</td>
-          <td v-if="target[0].ordinaryThreeTargetScore!==null&&target[0].ordinaryThreeTargetScore!==0">是否支撑课程目标三</td>
-          <td v-if="target[0].ordinaryFourTargetScore!==null&&target[0].ordinaryFourTargetScore!==0">是否支撑课程目标四</td>
-          <td v-if="target[0].ordinaryFiveTargetScore!==null&&target[0].ordinaryFiveTargetScore!==0">是否支撑课程目标五</td>
-          <td colspan="2">操作</td>
+          <td style="width: 100px">考核类别</td>
+          <td style="width: 100px">任务序号</td>
+          <td style="width: 200px">任务内容</td>
+          <td style="width: 200px" v-if="target[0].ordinaryOneTargetScore!==null&&target[0].ordinaryOneTargetScore!==0">是否支撑课程目标一</td>
+          <td style="width: 200px" v-if="target[0].ordinaryTwoTargetScore!==null&&target[0].ordinaryTwoTargetScore!==0">是否支撑课程目标二</td>
+          <td style="width: 200px" v-if="target[0].ordinaryThreeTargetScore!==null&&target[0].ordinaryThreeTargetScore!==0">是否支撑课程目标三</td>
+          <td style="width: 200px" v-if="target[0].ordinaryFourTargetScore!==null&&target[0].ordinaryFourTargetScore!==0">是否支撑课程目标四</td>
+          <td style="width: 200px" v-if="target[0].ordinaryFiveTargetScore!==null&&target[0].ordinaryFiveTargetScore!==0">是否支撑课程目标五</td>
+          <td style="width: 200px" colspan="2">操作</td>
         </tr>
         <tr v-for="(pro,index) in processList" :key="index">
           <td><el-input v-model="pro.processClassification" disabled="disabled"></el-input></td>
           <td><el-input v-model="pro.processNumber"></el-input></td>
-          <td><el-input v-model="pro.processContent"></el-input></td>
+          <td><a href="javascript:void(0);" @click="contentLook(index)">{{pro.processContent | length(8) }}</a></td>
           <td v-if="target[0].ordinaryOneTargetScore!==null&&target[0].ordinaryOneTargetScore!==0&&pro.ifCourseOne==='true'"><el-checkbox v-model="checked">支撑</el-checkbox></td>
           <td v-else-if="target[0].ordinaryOneTargetScore!==null&&target[0].ordinaryOneTargetScore!==0&&(pro.ifCourseOne.length===0||pro.ifCourseOne==='false')"><el-checkbox>支撑</el-checkbox></td>
           <td v-if="target[0].ordinaryTwoTargetScore!==null&&target[0].ordinaryTwoTargetScore!==0&&pro.ifCourseTwo==='true'"><el-checkbox v-model="checked">支撑</el-checkbox></td>
@@ -52,7 +52,18 @@
           <tr>
             <td><el-input v-model="process.processClassification" disabled="disabled"></el-input></td>
             <td><el-input v-model="process.processNumber" maxlength="6" οninput="value=value.replace(/[^\d]/g,'')" placeholder="填写小写数字"></el-input></td>
-            <td><textarea v-model="process.processContent" cols="50" rows="10"></textarea></td>
+            <td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                :cols="80"
+                placeholder="请输入内容"
+                v-model="process.processContent"
+                maxlength="200"
+                show-word-limit
+              >
+              </el-input>
+            </td>
             <td v-if="target[0].ordinaryOneTargetScore!==null&&target[0].ordinaryOneTargetScore!==0"><el-checkbox v-model="process.ifCourseOne">支撑</el-checkbox></td>
             <td v-if="target[0].ordinaryTwoTargetScore!==null&&target[0].ordinaryTwoTargetScore!==0"><el-checkbox v-model="process.ifCourseTwo">支撑</el-checkbox></td>
             <td v-if="target[0].ordinaryThreeTargetScore!==null&&target[0].ordinaryThreeTargetScore!==0"><el-checkbox v-model="process.ifCourseThree">支撑</el-checkbox></td>
@@ -66,13 +77,13 @@
         </div>
       </el-dialog>
       <el-dialog title="提交任务成绩" :visible.sync="dialogVisible2">
-        <table>
+        <table class="resultScore">
           <tr>请以百分制打分</tr>
           <tr>
-            <td>学号</td>
-            <td>班级</td>
-            <td>姓名</td>
-            <td>任务成绩</td>
+            <th>学号</th>
+            <th>班级</th>
+            <th>姓名</th>
+            <th>任务成绩</th>
           </tr>
           <tr v-for="(stu,index) in processScoreList" :key="index">
             <td>{{stu.studentSno}}</td>
@@ -87,13 +98,13 @@
         </div>
       </el-dialog>
       <el-dialog title="更新任务成绩" :visible.sync="dialogVisible3">
-        <table>
+        <table class="resultScore">
           <tr>请以百分制打分</tr>
           <tr>
-            <td>学号</td>
-            <td>班级</td>
-            <td>姓名</td>
-            <td>任务成绩</td>
+            <th>学号</th>
+            <th>班级</th>
+            <th>姓名</th>
+            <th>任务成绩</th>
           </tr>
           <tr v-for="(stu,index) in processScoreList" :key="index">
             <td>{{stu.studentSno}}</td>
@@ -105,6 +116,14 @@
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible3 = false">取 消</el-button>
           <el-button type="primary" @click="submitNewScore">更新</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="查看任务详情" :visible.sync="dialogVisible4">
+        <div>题目：{{contentPlay.Classification}}{{contentPlay.number}}</div>
+        <br>
+        <div>内容：{{contentPlay.content}}</div>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogVisible4 = false">确  认</el-button>
         </div>
       </el-dialog>
     </div>
@@ -127,7 +146,13 @@ export default {
       dialogVisible1: false,
       dialogVisible2: false,
       dialogVisible3: false,
+      dialogVisible4: false,
       processNumber: '',
+      contentPlay: {
+        Classification: '',
+        number: '',
+        content: ''
+      },
       targetText: {
         courseTargetOne: '',
         courseTargetTwo: '',
@@ -212,6 +237,11 @@ export default {
       console.log(error)
     })
   },
+  filters: {
+    length (value, num) {
+      return value.slice(0, num) + '...'
+    }
+  },
   methods: {
     compare (attr) {
       return function (a, b) {
@@ -242,6 +272,12 @@ export default {
       }).catch(function (error) {
         console.log(error)
       })
+    },
+    contentLook (index) {
+      this.dialogVisible4 = true
+      this.contentPlay.Classification = this.processList[index].processClassification
+      this.contentPlay.number = this.processList[index].processNumber
+      this.contentPlay.content = this.processList[index].processContent
     },
     insertProcessText () {
       this.dialogVisible1 = false
@@ -289,12 +325,14 @@ export default {
             courseGrade: sessionStorage.getItem('courseGrade')
           }).then(res => {
             this.processScoreList = res.data
+            this.processScoreList.sort(this.compare('studentClass'))
           }).catch(function (error) {
             console.log(error)
           })
         } else {
           this.dialogVisible3 = true
           this.processScoreList = res.data
+          this.processScoreList.sort(this.compare('studentClass'))
         }
       }).catch(function (error) {
         console.log(error)

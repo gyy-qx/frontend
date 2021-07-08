@@ -23,6 +23,11 @@ import TeacherInHomepage from '../views/TeacherInHomepage'
 import Submit from '../views/Submit'
 import CourseUpdate from '../views/CourseUpdate'
 import Email from '../views/Email'
+import GradeDegreeCompute from '../views/GradeDegreeCompute'
+import GradeDegreeReport from '../views/GradeDegreeReport'
+import firstStep from '../components/firstStep'
+import secondStep from '../components/secondStep'
+import thridStep from '../components/thridStep'
 Vue.use(VueRouter)
 
 const routes = [
@@ -49,7 +54,25 @@ const routes = [
   {
     path: '/signIn',
     name: 'SignIn',
-    component: SignIn
+    component: SignIn,
+    redirect: '/firstStep',
+    children: [
+      {
+        path: '/firstStep',
+        name: 'firstStep',
+        component: firstStep
+      },
+      {
+        path: '/secondStep',
+        name: 'secondStep',
+        component: secondStep
+      },
+      {
+        path: '/thridStep',
+        name: 'thridStep',
+        component: thridStep
+      }
+    ]
   },
   {
     path: '/courseDegreeCompute',
@@ -109,6 +132,16 @@ const routes = [
         path: '/upLoad',
         name: 'UpLoad',
         component: UpLoad
+      },
+      {
+        path: '/gradeDegreeCompute',
+        name: 'GradeDegreeCompute',
+        component: GradeDegreeCompute
+      },
+      {
+        path: '/gradeDegreeReport',
+        name: 'GradeDegreeReport',
+        component: GradeDegreeReport
       },
       {
         path: '/assignOrdinary',

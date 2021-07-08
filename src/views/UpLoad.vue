@@ -205,6 +205,7 @@ export default {
       courseMajor: this.courseMajor
     }).then(res => {
       this.classList = res.data
+      this.classList.sort()
     }).catch(function (error) {
       console.log(error)
     })

@@ -14,7 +14,7 @@
 #MyAccount hr{
     margin-bottom: 50px;
 }
-h2{
+#MyAccount h2{
     position: absolute;
     top:50px;
     left:150px;
@@ -22,78 +22,82 @@ h2{
     font-size: 40px;
     color: #42d0f0;
 }
-h2 span{
+#MyAccount h2 span{
     font-size: 30px;
     color:#41464b;
 }
-#sex{
-    margin-left: 185px;
+#MyAccount #MyAccount_sex{
+    margin-left: 15%;
 }
-#researchName{
-    margin-left: 135px;
+#MyAccount #MyAccount_researchName{
+    margin-left: 15%;
 }
-.first {
+#MyAccount .MyAccount_first {
     font-size: 20px;
     margin-left: 20%;
     margin-top: 20px;
 }
 
-.first span {
+#MyAccount .MyAccount_first span {
     color: lightcoral;
 }
 
-.sec {
+#MyAccount .MyAccount_sec {
     color: #4f5050;
     margin-left: 30%;
-    margin-top: 10px;
+    margin-top: 40px;
 }
 
-.sec input {
-    border: solid 1px #c4d0ff;
-    position: absolute;
-    left: 52%;
-    height: 20px;
+#MyAccount .MyAccount_sec .el-input {
+    width: 250px;
+    margin-left:15%;
+    height: 30px;
+    display: inline-block;
 }
-.sec .identity{
+#MyAccount .MyAccount_sec .userIdentity{
     margin-left: 15%;
 }
-.sec span {
+#MyAccount .MyAccount_sec span {
+    display: inline-block;
+    width: 100px;
 }
 
-#submit {
+#MyAccount #MyAccount_submit {
     color: white;
     width: 20%;
-    height: 30px;
+    height: 40px;
     display: block;
     margin-top: 50px;
-    margin-left: 25%;
+    margin-left: 40%;
     background-color: orangered;
     border: none;
     box-shadow: #1a1e21;
     border-radius: 10px;
     margin-bottom: 100px;
 }
-.userIdentity{
-    display: inline-block;
-    margin-left: 80px;
-    /*margin-top: 20px;*/
+/*span .el-radio__inner{*/
+/*    width: 14px;*/
+/*    margin-right: 0px;*/
+/*}*/
+.userIdentity .el-radio__label{
+    font-size: 15px;
 }
 input::-webkit-input-placeholder {
     font-size: 8px;
 }
-.avatar-uploader .el-upload {
+.MyAccount_avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     /*cursor: pointer;*/
     /*position: relative;*/
     overflow: hidden;
-    margin-left: 45%;
+    margin-left: 47%;
     display: inline-block;
 }
-.avatar-uploader .el-upload:hover {
+.MyAccount_avatar-uploader .el-upload:hover {
     border-color: #409EFF;
 }
-.avatar-uploader-icon {
+.MyAccount_avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
     width: 100px;

@@ -11,6 +11,9 @@
 #emailMy hr{
     margin-bottom: 50px;
 }
+#emailBody{
+    margin-left: 3%;
+}
 #emailMy #updateStateAll{
     margin-left: 70%;
     margin-bottom: 20px;
@@ -48,7 +51,7 @@
 #emailMy button .time{
     display: inline-block;
     position: absolute;
-    right: 380px;
+    right: 360px;
 }
 
 #emailMy #delete{

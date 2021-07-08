@@ -2,10 +2,10 @@
   <div id="MyAccount">
     <h3>我的账户</h3>
     <hr>
-    <p class="first" style="margin-top: 120px"><span>*</span>基本信息</p>
-    <p class="sec">头像</p>
+    <p class="MyAccount_first" style="margin-top: 120px"><span>*</span>基本信息</p>
+    <p class="MyAccount_sec"> <span>头像</span></p>
       <el-upload
-        class="avatar-uploader"
+        class="MyAccount_avatar-uploader"
         action="http://localhost:8080/upload"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
@@ -17,48 +17,50 @@
         </el-popover>
 <!--        <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
       </el-upload>
-    <p class="sec">
-      <span>教师工号</span><input type="text" v-model="teacher.teacherNumber">
+    <p class="MyAccount_sec" style="margin-top: 20px">
+      <span>教师工号</span><el-input type="text" v-model="teacher.teacherNumber"></el-input>
     </p>
-    <p class="sec">
-      <span>姓名</span><input type="text" v-model="teacher.teacherName">
+    <p class="MyAccount_sec">
+      <span>姓名</span><el-input type="text" v-model="teacher.teacherName"></el-input>
     </p>
-    <p class="sec">
+    <p class="MyAccount_sec">
       <span>性别</span>
-      <select name="sex" id="sex" @click="getSex">
+      <select name="sex" id="MyAccount_sex" @click="getSex" style="height: 25px">
         <option value="男">男</option>
         <option value="女">女</option>
       </select>
     </p>
-    <p class="sec">
-      <span>联系方式</span><input type="text" v-model="teacher.teacherTel">
+    <p class="MyAccount_sec">
+      <span>联系方式</span><el-input type="text" v-model="teacher.teacherTel"></el-input>
     </p>
-    <p class="sec">
-      <span>邮箱</span><input type="text" v-model="teacher.teacherEmail">
+    <p class="MyAccount_sec">
+      <span>邮箱</span><el-input type="text" v-model="teacher.teacherEmail"></el-input>
     </p>
-    <p class="first"><span>*</span>工作信息</p>
-    <p class="sec">
-      <span>职称</span><input type="text" v-model="teacher.teacherProfessionalTitle">
+    <p class="MyAccount_first"><span>*</span>工作信息</p>
+    <p class="MyAccount_sec">
+      <span>职称</span><el-input type="text" v-model="teacher.teacherProfessionalTitle"></el-input>
     </p>
-    <p class="sec">
-      <span>学历</span><input type="text" v-model="teacher.teacherEducation">
+    <p class="MyAccount_sec">
+      <span>学历</span><el-input type="text" v-model="teacher.teacherEducation"></el-input>
     </p>
-    <p class="sec">
+    <p class="MyAccount_sec">
       <span>所属教研室</span>
-      <select name="researchName" id="researchName" v-model="teacher.teacherResearch">
+      <select name="researchName" id="MyAccount_researchName" v-model="teacher.teacherResearch" style="height: 25px">
         <option v-for="(research,index) in researches" :key="index">{{research}}</option>
       </select>
     </p>
-    <div class="sec">
+    <div class="MyAccount_sec">
       <span>身份</span>
-      <el-radio v-model="identity" label="teacher" class="userIdentity">教师</el-radio>
-      <el-radio v-model="identity" label="teacher_head" class="userIdentity">教研室主任</el-radio>
+      <input type="radio" v-model="identity" label="teacher" value="teacher" name="identity" style="margin-left:15%">教师
+      <input type="radio" v-model="identity" label="teacher_head" value="teacher_head" name="identity" style="margin-left:3%">教研室主任
+<!--      <el-radio v-model="identity" label="teacher" class="userIdentity" >教师</el-radio>-->
+<!--      <el-radio v-model="identity" label="teacher_head" class="userIdentity">教研室主任</el-radio>-->
     </div>
-    <p class="first"><span>*</span>修改登录密码</p>
-    <p class="sec">
-      <span>密码</span><input type="text" v-model="password">
+    <p class="MyAccount_first"><span>*</span>修改登录密码</p>
+    <p class="MyAccount_sec">
+      <span>密码</span><el-input type="text" v-model="password"></el-input>
     </p>
-    <input type="button" id="submit" value="提  交" @click="submit">
+    <input type="button" id="MyAccount_submit" value="提  交" @click="submit">
   </div>
 </template>
 

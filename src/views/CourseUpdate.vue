@@ -86,7 +86,7 @@
           <tr>
             <td rowspan="2">操作</td>
             <td><el-button type="primary" icon="el-icon-check" @click="updateCourse()">提交修改</el-button>
-              <el-button type="primary" icon="el-icon-s-comment" @click="dialogVisible = true">发送邮件</el-button>
+              <el-button type="primary" icon="el-icon-s-comment" @click="openDialog">发送邮件</el-button>
             </td>
             </tr>
 <!--          <tr>-->
@@ -95,71 +95,82 @@
         </table>
       <el-dialog title="发送邮件" :visible.sync="dialogVisible">
         课程名称<el-input v-model="courseName" disabled="disabled"></el-input>
-        收件人<el-input v-model="course.courseTeacher" disabled="disabled"></el-input>
+        收件人<el-input v-model="courseTeacher" disabled="disabled"></el-input>
         主题<el-input v-model="email.emailTitle"></el-input>
-        内容 <br> <textarea name="" id="" cols="100" rows="10" v-model="email.emailContent"></textarea>
+        内容 <br>
+        <el-input
+          type="textarea"
+          :rows="6"
+          placeholder="请输入内容"
+          v-model="email.emailContent"
+          maxlength="200"
+          show-word-limit
+        >
+        </el-input>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addEmail">确 定</el-button>
-        </div>
+        <el-button type="primary" @click="addEmail">确 定</el-button>
+      </div>
       </el-dialog>
-    </div>
-</template>
+      </div>
+      </template>
 
-<!--加上scoped能够防止样式之间的冲突-->
-<style scoped>
-  @import "../assets/courseUpdate.css";
-</style>
+      <!--加上scoped能够防止样式之间的冲突-->
+      <style scoped>
+      @import "../assets/courseUpdate.css";
+      </style>
 
-<script>
-import axios from 'axios'
-export default {
-  data () {
-    return {
+      <script>
+      import axios from 'axios'
+      export default {
+      data () {
+      return {
       dialogVisible: false,
       pathImg: '',
       imageUrl: '',
       teacher: '',
+      courseTeacher: '',
       researchTeacherList: [],
       teacherList: [],
       courseName: sessionStorage.getItem('courseName'),
       courseGrade: sessionStorage.getItem('courseGrade'),
       courseMajor: sessionStorage.getItem('courseMajor'),
       course: {
-        courseName: '',
-        courseCover: '',
-        courseGrade: '',
-        courseEnglish: '',
-        courseClassification: '',
-        courseCharacter: '',
-        courseTerm: '',
-        courseCredit: '',
-        courseClassHour: '',
-        courseMajor: '',
-        courseExaminationMethod: '',
-        courseSpecificMethod: '',
-        courseAdvancedPlacement: '',
-        courseTeacher: ''
+      courseName: '',
+      courseCover: '',
+      courseGrade: '',
+      courseEnglish: '',
+      courseClassification: '',
+      courseCharacter: '',
+      courseTerm: '',
+      courseCredit: '',
+      courseClassHour: '',
+      courseMajor: '',
+      courseExaminationMethod: '',
+      courseSpecificMethod: '',
+      courseAdvancedPlacement: '',
+      courseTeacher: ''
       },
       email: {
-        courseTeacher: '',
-        emailTitle: '',
-        emailContent: '',
-        emailState: 0,
-        emailTime: ''
+      courseTeacher: '',
+      emailTitle: '',
+      emailContent: '',
+      emailState: 0,
+      emailTime: '',
+      emailTeacher: ''
       }
-    }
-  },
-  created () {
-    axios.post('api/getCourseOne', {
+      }
+      },
+      created () {
+      axios.post('api/getCourseOne', {
       courseName: this.courseName,
       courseMajor: this.courseMajor,
       courseGrade: this.courseGrade
-    }).then(res => {
+      }).then(res => {
       this.course = res.data
       this.imageUrl = 'http://localhost:8080/coverImg/' + this.course.courseCover
       axios.post('api/getTeacherName', {
-        teacherNumber: this.course.courseTeacher
+      teacherNumber: this.course.courseTeacher
       }).then(res => {
         this.teacher = res.data
       })
@@ -185,23 +196,42 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw)
       this.course.courseCover = res
     },
-    deleteCourse () {
-      axios.post('api/deleteCourse', {
-        courseName: this.course.courseName,
-        courseMajor: this.course.courseMajor,
-        courseGrade: this.course.courseGrade
+    openDialog () {
+      this.dialogVisible = true
+      axios.post('api/getEmailPersonName', {
+        emailTeacher: this.course.courseTeacher
       }).then(res => {
-        if (res.data === '删除成功') {
-          this.$message({
-            message: res.data,
-            type: 'success'
-          })
-        } else {
-          this.$message({
-            message: res.data,
-            type: 'error'
-          })
-        }
+        this.courseTeacher = res.data
+      })
+    },
+    deleteCourse () {
+      this.$confirm('课程的所有信息都会被删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        axios.post('api/deleteCourse', {
+          courseName: this.course.courseName,
+          courseMajor: this.course.courseMajor,
+          courseGrade: this.course.courseGrade
+        }).then(res => {
+          if (res.data === '删除成功') {
+            this.$message({
+              message: res.data,
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: res.data,
+              type: 'error'
+            })
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     },
     updateCourse () {

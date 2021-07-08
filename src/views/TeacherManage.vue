@@ -3,8 +3,8 @@
         <h3>{{researchName}}</h3>
       <hr>
       <div id="search">
-        <el-input id="inputTeacher"></el-input>
-        <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+        <el-input id="inputTeacher" placeholder="请输入教师" v-model="teacherName"></el-input>
+        <el-button type="primary" icon="el-icon-search" @click="searchTeacher">搜索</el-button>
       </div>
       <table>
         <tr>
@@ -57,9 +57,11 @@
       font-family: 幼圆;
       font-size: 30px;
     }
-  #search #inputTeacher{
+ .el-input{
     display: inline-block;
-    width: 5%;
+    width: 200px;
+   margin-left: 2%;
+   margin-bottom: 30px;
   }
 </style>
 
@@ -70,6 +72,7 @@ export default {
     return {
       disabled: true,
       user: '',
+      teacherName: '',
       researchName: '',
       teacherList: [
         {
@@ -108,9 +111,7 @@ export default {
     axios.post('api/getAllTeacher', {
       teacherNumber: this.user
     }).then(res => {
-      console.log(res.data)
       this.teacherList = res.data
-      console.log(this.teacherList)
     }).catch(function (error) {
       console.log(error)
     })
@@ -148,9 +149,22 @@ export default {
         teacherTel: this.teacherList[index].teacherTel,
         teacherEmail: this.teacherList[index].teacherEmail
       }).then(res => {
-        alert(res.data)
+        this.$message({
+          message: res.data,
+          type: 'success'
+        })
       }).catch(function (error) {
         console.log(error)
+      })
+    },
+    searchTeacher () {
+      axios.post('api/searchTeacherOne', {
+        teacherName: this.teacherName
+      }).then(res => {
+        this.teacherList = []
+        this.teacherList[0] = res.data
+      }).catch(function (err) {
+        console.log(err)
       })
     }
   }

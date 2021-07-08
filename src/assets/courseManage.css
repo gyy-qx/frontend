@@ -12,10 +12,13 @@
     margin-left: 5%;
 }
 #courseManage #addCourse{
-    margin-left: 75%;
+    margin-left: 78%;
     margin-top: 20px;
     margin-bottom: 40px;
     display: block;
+}
+#courseList{
+    margin-left: 3%;
 }
 .titleWarn{
     font-size: 15px;
